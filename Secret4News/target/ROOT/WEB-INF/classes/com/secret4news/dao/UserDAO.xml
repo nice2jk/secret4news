@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.secret4news.dao.UserDAO">
+	<insert id="insertUser" parameterType="java.util.HashMap">
+		INSERT INTO user (user_id, push_token) VALUES (#{id}, #{push}) ON DUPLICATE KEY UPDATE visit_count = visit_count + 1
+	</insert>
+	
+	<update id="setPush">
+		UPDATE user SET push_onoff = #{onoff} WHERE user_id = #{id}
+	</update>
+	
+	<select id="getVersion" resultType="String">
+		SELECT cd_val FROM common WHERE cd_id = 'ver'
+	</select>
+	
+	<update id="setVersion">
+		UPDATE common SET cd_val = #{ver} WHERE cd_id = 'ver'
+	</update>
+	
+</mapper>
