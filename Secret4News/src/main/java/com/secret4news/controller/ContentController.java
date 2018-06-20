@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,4 +63,31 @@ public class ContentController {
 		
 		contentService.setGrade(id, grade);
 	}
+	
+	@RequestMapping (value = "/main", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public String getMainContents(
+			@RequestParam(value="category", required=true) String category,
+			@RequestParam(value="offset", required=true, defaultValue="0") int offset,
+			@RequestParam(value="search", required=false) String search,
+			Model model) {
+		System.out.println("MAIN GET : " + category + " | " + offset + " | " + search);
+				
+		HashMap<String, Object> requestMap = new HashMap<String, Object>();
+		
+		requestMap.put("category", category);
+		requestMap.put("offset", offset);
+		
+		if(search != null) {
+			requestMap.put("search", search);
+		}
+		
+		model.addAttribute("contents", contentService.getContents(requestMap));
+		model.addAttribute("category", category);
+		model.addAttribute("offset", offset);
+		
+		return "contents";
+	}
+	
+	
 }
