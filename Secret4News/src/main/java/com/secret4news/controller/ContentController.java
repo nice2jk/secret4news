@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
 import com.secret4news.service.ContentService;
+import com.secret4news.utils.CategoryUtils;
 
 @Controller
 public class ContentController {
@@ -81,10 +82,15 @@ public class ContentController {
 		if(search != null) {
 			requestMap.put("search", search);
 		}
-		
+
+		model.addAttribute("cName", CategoryUtils.getCategoryName(category));
 		model.addAttribute("contents", contentService.getContents(requestMap));
 		model.addAttribute("category", category);
 		model.addAttribute("offset", offset);
+		
+		if(search != null) {
+			model.addAttribute("search", search);
+		}
 		
 		return "contents";
 	}

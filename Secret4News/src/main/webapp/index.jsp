@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
 
 <html lang="ko">
-<h1>쓰잘데기 6.0</h1>
+<h1>쓰잘데기 6.1</h1>
 <form id="mainContents" action="/main" method="get" onLoad = "calls()">
 	 <input type="hidden" name="category" value="best" />
 </form>

@@ -32,9 +32,9 @@
 	</select>
 	
 	<select id="getBestContents" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT id, cpname, title, link, category, grade, ctime FROM content_best 
+		SELECT id, cpname, title, link, category, grade, ctime FROM content_best
 		<if test="search != null and search != ''">
-			AND title LIKE '%${search}%'
+			WHERE title LIKE '%${search}%'
 		</if>
 		ORDER BY ctime DESC 
 		<choose>
