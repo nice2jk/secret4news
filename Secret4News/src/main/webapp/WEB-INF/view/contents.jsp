@@ -57,45 +57,64 @@
 	<table style="table-layout: fixed" class="table">
 		<thead>
 			<tr class="table-info">
-				<th colspan="2" scope="col" class="text-uppercase"><a href="/main?category=${category}">[${cName}]</a></th>
+				<th colspan="2" scope="col" class="text-uppercase"><a href="/main?category=${category}" class="text-danger">[${cName}]</a></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="ct" begin="0" end="20" items="${contents}" varStatus="status">
 				<tr>					
-					<td colspan="2" style="text-overflow: ellipsis; overflow: hidden;"><a href="${ct.link}" target="_blank">${ct.title}</a></td>										
+					<td colspan="2" style="text-overflow: ellipsis; overflow: hidden;"><a href="${ct.link}" target="_blank" class="font-weight-bold">${ct.title}</a></td>										
 				</tr>
 				<tr class="table table-borderless">
-					<td class="font-weight-light text-muted" style="white-space: nowrap">${ct.cpname}</td>					
-					<td class="font-weight-light text-muted" style="text-overflow: ellipsis; overflow: hidden;" align="right">${ct.ctime}</td>
+					<td class="font-weight-light font-italic text-dark" style="white-space: nowrap">${ct.cpname}</td>					
+					<td class="font-weight-light text-dark" style="text-overflow: ellipsis; overflow: hidden;" align="right">${ct.ctime}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	
 	<hr>
-	<p>
 	
-	<div  class="container">
-		<div class="row"> 
-		<c:choose>
-			<c:when test="${offset == 0}">
-				<button type="button" class="btn btn-secondary" disabled>< 이전</button>			
-			</c:when>
-			<c:otherwise>
-				<button type="button" class="btn btn-primary" onclick="location.href = '/main?category=${category}&offset=${offset-20}'">< 이전</button>
-			</c:otherwise>
-		</c:choose>
-			<form class="form-inline my-2 my-lg-0">
-				<input type="hidden" name="category" value="${category}">
-				<input type="hidden" name="offset" value="${offset}">
-				<input class="form-control mr-sm-2" type="search" name="search"
-					placeholder="검색어" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="location.href = '/main">검색</button>
-			</form>
-		<button type="button" class="btn btn-primary" onclick="location.href = '/main?category=${category}&offset=${offset+20}'">다음 ></button></div>	
-	</div>
+	<nav aria-label="pagination">
+	  <ul class="pagination justify-content-center">
+	  	<c:choose>
+	  		<c:when test="${offset == 0 }">
+	  			<li class="page-item disabled">
+			      <a class="page-link" href="#" tabindex="-1">최신</a>
+			    </li>
+	  		</c:when>
+	  		<c:otherwise>
+	  			<li class="page-item">
+			      <a class="page-link" href="/main?category=${category}&offset=${offset-20}">< 이전</a>
+			    </li>
+	  		</c:otherwise>
+	  	</c:choose>
+	    <li class="page-item disabled"><a class="page-link" href="#">현재 페이지</a></li>
+	    <c:choose>
+	    	<c:when test="${empty search }">
+	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}">다음 ></a></li>
+	    	</c:when>
+	    	<c:otherwise>
+	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}&search=${search}">다음 ></a></li>
+	    	</c:otherwise>
+	    </c:choose>	    
+	  </ul>
+	</nav>
 	
+	<form class="form-inline justify-content-center">
+	  <div class="form-group mb-2">
+	    <label for="staticEmail2" class="sr-only">검색하기</label>
+	    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="검색하기">
+	  </div>
+	  <div class="form-group mx-sm-3 mb-2">
+	    <label for="inputPassword2" class="sr-only">검색어</label>
+	    <input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="offset" value="${offset}">
+	    <input type="search" class="form-control" name="search" placeholder="검색어">
+	  </div>
+	  <button type="submit" class="btn btn-primary mb-2">검색</button>
+	</form>
+		
 	<p>
 	<footer class="text-muted">
 		<div class="container">
