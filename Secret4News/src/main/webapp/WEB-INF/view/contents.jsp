@@ -54,26 +54,20 @@
 		</div>
 	</nav>
 
-	<table style="table-layout: fixed" class="table">
-		<thead>
-			<tr class="table-info">
-				<th colspan="2" scope="col" class="text-uppercase"><a href="/main?category=${category}" class="text-danger">[${cName}]</a></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="ct" begin="0" end="20" items="${contents}" varStatus="status">
-				<tr>					
-					<td colspan="2" style="text-overflow: ellipsis; overflow: hidden;"><a href="${ct.link}" target="_blank" class="font-weight-bold">${ct.title}</a></td>										
-				</tr>
-				<tr class="table table-borderless">
-					<td class="font-weight-light font-italic text-dark" style="white-space: nowrap">${ct.cpname}</td>					
-					<td class="font-weight-light text-dark" style="text-overflow: ellipsis; overflow: hidden;" align="right">${ct.ctime}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	<hr>
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+      <h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><img src="/images/trash.png" alt="..." class="img-thumbnail mr-1"><a href="/main?category=${category}">[${cName}]</a></h6>
+      <c:forEach var="ct" begin="0" end="10" items="${contents}" varStatus="status">
+        <div class="media text-muted pt-2">        
+        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+          <div class="d-flex justify-content-between mb-2 align-items-center w-100">
+            <span class="font-italic">${ct.cpname}</span>
+			<span class="text-success">${ct.ctime}</span>            
+          </div>
+          <strong style="text-overflow: ellipsis; overflow: hidden;"><a href="${ct.link}" target="_blank" class="text-danger">${ct.title}</a></strong>          
+        </div>
+      	</div>
+      </c:forEach>
+    </div>
 	
 	<nav aria-label="pagination">
 	  <ul class="pagination justify-content-center">
@@ -89,28 +83,24 @@
 			    </li>
 	  		</c:otherwise>
 	  	</c:choose>
-	    <li class="page-item disabled"><a class="page-link" href="#">현재 페이지</a></li>
+	    <li class="page-item disabled mr-2 ml-2"><a class="page-link" href="#">현재 페이지</a></li>
 	    <c:choose>
 	    	<c:when test="${empty search }">
-	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}">다음 ></a></li>
+	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}">이전 ></a></li>
 	    	</c:when>
 	    	<c:otherwise>
-	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}&search=${search}">다음 ></a></li>
+	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}&search=${search}">이전 ></a></li>
 	    	</c:otherwise>
 	    </c:choose>	    
 	  </ul>
 	</nav>
 	
-	<form class="form-inline justify-content-center">
-	  <div class="form-group mb-2">
-	    <label for="staticEmail2" class="sr-only">검색하기</label>
-	    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="검색하기">
-	  </div>
-	  <div class="form-group mx-sm-3 mb-2">
+	<form class="form-inline justify-content-center">	  
+	  <div class="form-group mx-sm-3 mb-2 mr-2">
 	    <label for="inputPassword2" class="sr-only">검색어</label>
 	    <input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="offset" value="${offset}">
-	    <input type="search" class="form-control" name="search" placeholder="검색어">
+	    <input type="search" class="form-control" name="search" placeholder="검색어" required>
 	  </div>
 	  <button type="submit" class="btn btn-primary mb-2">검색</button>
 	</form>
