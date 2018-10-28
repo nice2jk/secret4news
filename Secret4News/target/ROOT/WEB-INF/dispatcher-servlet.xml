@@ -17,6 +17,8 @@
 	<context:component-scan base-package="com.secret4news" />
 
 	<mvc:annotation-driven />
+	
+	<mvc:resources location="/images/" mapping="/images/**" />
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/" />

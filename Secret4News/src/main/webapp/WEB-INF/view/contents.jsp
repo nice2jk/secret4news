@@ -26,7 +26,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="/main?category=best">쓰잘데기</a>
+		<a class="navbar-brand" href="/main?category=best"><img src="/images/trash2.png" alt="..." class="img-thumbnail mr-1">쓰잘데기</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -55,11 +55,11 @@
 	</nav>
 
 	<div class="my-3 p-3 bg-white rounded shadow-sm">
-      <h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><img src="/images/trash.png" alt="..." class="img-thumbnail mr-1"><a href="/main?category=${category}">[${cName}]</a></h6>
+      <h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><a href="/main?category=${category}">[${cName}]</a></h6>
       <c:forEach var="ct" begin="0" end="10" items="${contents}" varStatus="status">
-        <div class="media text-muted pt-2">        
-        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-          <div class="d-flex justify-content-between mb-2 align-items-center w-100">
+        <div class="media text-muted pt-2">
+        <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+          <div class="d-flex justify-content-between mb-2 small align-items-center w-100">
             <span class="font-italic">${ct.cpname}</span>
 			<span class="text-success">${ct.ctime}</span>            
           </div>
