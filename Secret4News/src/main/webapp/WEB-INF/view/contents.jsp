@@ -63,7 +63,10 @@
             <span class="font-italic">${ct.cpname}</span>
 			<span class="text-success">${ct.ctime}</span>            
           </div>
-          <strong style="text-overflow: ellipsis; overflow: hidden;"><a href="${ct.link}" target="_blank" class="text-danger">${ct.title}</a></strong>          
+          <div class="d-flex justify-content-between mb-0 align-items-center w-100">
+          <strong style="text-overflow: ellipsis; overflow: hidden;"><a href="${ct.link}" target="_blank" class="text-danger">${ct.title}</a></strong>
+          <img src="/images/check_no.png" alt="..." class="img-thumbnail ml-2">
+          </div>          
         </div>
       	</div>
       </c:forEach>
