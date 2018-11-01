@@ -81,9 +81,14 @@
 			    </li>
 	  		</c:when>
 	  		<c:otherwise>
-	  			<li class="page-item">
-			      <a class="page-link" href="/main?category=${category}&offset=${offset-20}">< 이전</a>
-			    </li>
+		  		<c:choose>
+					<c:when test="${empty search }">
+						<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset-20}">< 다음</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset-20}&search=${search}">< 다음</a></li>
+					</c:otherwise>
+		  		</c:choose>
 	  		</c:otherwise>
 	  	</c:choose>
 	    <li class="page-item disabled mr-2 ml-2"><a class="page-link" href="#">현재 페이지</a></li>
@@ -101,8 +106,7 @@
 	<form class="form-inline justify-content-center">	  
 	  <div class="form-group mx-sm-3 mb-2 mr-2">
 	    <label for="inputPassword2" class="sr-only">검색어</label>
-	    <input type="hidden" name="category" value="${category}">
-		<input type="hidden" name="offset" value="${offset}">
+	    <input type="hidden" name="category" value="${category}">		
 	    <input type="search" class="form-control" name="search" placeholder="검색어" required>
 	  </div>
 	  <button type="submit" class="btn btn-primary mb-2">검색</button>
