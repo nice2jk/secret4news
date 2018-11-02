@@ -56,7 +56,7 @@
 
 	<div class="my-3 p-3 bg-white rounded shadow-sm">
       <h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><a href="/main?category=${category}">[${cName}]</a></h6>
-      <c:forEach var="ct" begin="0" end="10" items="${contents}" varStatus="status">
+      <c:forEach var="ct" begin="0" end="20" items="${contents}" varStatus="status">
         <div class="media text-muted pt-2">
         <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
           <div class="d-flex justify-content-between mb-2 small align-items-center w-100">
