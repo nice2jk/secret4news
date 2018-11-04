@@ -26,7 +26,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="/main?category=best"><img src="/images/trash2.png" alt="..." class="img-thumbnail mr-2">쓰잘데기</a>
+		<a class="navbar-brand" href="/main?category=best"><img src="/images/trash2.png" alt="..." class="img-thumbnail mr-1">쓰잘데기</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -55,45 +55,15 @@
 	</nav>
 
 	<div class="my-3 p-3 bg-white rounded shadow-sm">
-      <h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><a href="/main?category=${category}">[${cName}]</a></h6>
-      <c:forEach var="ct" begin="0" end="20" items="${contents}" varStatus="status">
+      <h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><a href="/articles">[자유게시판]</a><a href="/write"><img src="/images/write.png" alt="..." class="img-thumbnail mx-2"></a></h6>
+      <c:forEach var="at" begin="0" end="20" items="${articles}" varStatus="status">
         <div class="media text-muted pt-2">
         <div class="media-body pb-2 mb-0 lh-125 border-bottom border-gray">
           <div class="d-flex justify-content-between mb-2 small align-items-center w-100">
-            <span class="font-italic">${ct.cpname}</span>
-			<span class="text-success">${ct.ctime}</span>            
+            <span class="font-weight-bold">${at.aid}<img src="/images/view.png" alt="..." class="img-thumbnail mx-2">[${at.vcount}]<img src="/images/reply.png" alt="..." class="img-thumbnail mx-2">[${at.count}]</span>
+			<span class="text-success">${at.ctime}</span>
           </div>
-          <div class="d-flex justify-content-between mb-0 align-items-center w-100">
-          <strong style="text-overflow: ellipsis; overflow: hidden;"><a href="${ct.link}" target="_blank" class="text-danger">${ct.title}</a></strong>
-          <form action="/grade" method="POST">
-          	<input type="hidden" name="id" value="${ct.id}">
-          	<c:choose>
-				<c:when test="${ct.grade == 1 }">
-					<input type="hidden" name="grade" value="2">					
-				</c:when>
-				<c:otherwise>
-					<input type="hidden" name="grade" value="1">
-				</c:otherwise>
-	  		</c:choose>
-          	<input type="hidden" name="offset" value="${offset}">
-          	<input type="hidden" name="category" value="${category}">
-          	<c:choose>
-				<c:when test="${empty ct.search }">					
-				</c:when>
-				<c:otherwise>
-					<input type="hidden" name="search" value="${ct.search}">
-				</c:otherwise>
-	  		</c:choose>
-          <c:choose>
-          	<c:when test="${ct.grade == 2}">
-          		<input type="image" src="/images/check_yes.png" alt="Submit" class="img-thumbnail ml-2">
-          	</c:when>
-          	<c:otherwise>
-          		<input type="image" src="/images/check_no.png" alt="Submit" class="img-thumbnail ml-2">
-          	</c:otherwise>
-          </c:choose>
-          </form>
-          </div>          
+          <strong style="text-overflow: ellipsis; overflow: hidden;"><a href="/article?aid=${at.aid}" class="text-danger">${at.title}</a></strong>          
         </div>
       	</div>
       </c:forEach>
@@ -102,7 +72,7 @@
 	<nav aria-label="pagination">
 	  <ul class="pagination justify-content-center">
 	  	<c:choose>
-	  		<c:when test="${offset == 0 }">
+	  		<c:when test="${offset == 0}">
 	  			<li class="page-item disabled">
 			      <a class="page-link" href="#" tabindex="-1">최신</a>
 			    </li>
@@ -110,10 +80,10 @@
 	  		<c:otherwise>
 		  		<c:choose>
 					<c:when test="${empty search }">
-						<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset-20}">< 다음</a></li>
+						<li class="page-item"><a class="page-link" href="/articles?offset=${offset-20}">< 다음</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset-20}&search=${search}">< 다음</a></li>
+						<li class="page-item"><a class="page-link" href="/articles?offset=${offset-20}&search=${search}">< 다음</a></li>
 					</c:otherwise>
 		  		</c:choose>
 	  		</c:otherwise>
@@ -121,23 +91,14 @@
 	    <li class="page-item disabled mr-2 ml-2"><a class="page-link" href="#">현재 페이지</a></li>
 	    <c:choose>
 	    	<c:when test="${empty search }">
-	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}">이전 ></a></li>
+	    		<li class="page-item"><a class="page-link" href="/articles?offset=${offset+20}">이전 ></a></li>
 	    	</c:when>
 	    	<c:otherwise>
-	    		<li class="page-item"><a class="page-link" href="/main?category=${category}&offset=${offset+20}&search=${search}">이전 ></a></li>
+	    		<li class="page-item"><a class="page-link" href="/articles?offset=${offset+20}&search=${search}">이전 ></a></li>
 	    	</c:otherwise>
 	    </c:choose>	    
 	  </ul>
-	</nav>
-	
-	<form class="form-inline justify-content-center">	  
-	  <div class="form-group mx-sm-3 mb-2 mr-2">
-	    <label for="inputPassword2" class="sr-only">검색어</label>
-	    <input type="hidden" name="category" value="${category}">		
-	    <input type="search" class="form-control" name="search" placeholder="검색어" required>
-	  </div>
-	  <button type="submit" class="btn btn-primary mb-2">검색</button>
-	</form>
+	</nav>	
 		
 	<p>
 	<footer class="text-muted">

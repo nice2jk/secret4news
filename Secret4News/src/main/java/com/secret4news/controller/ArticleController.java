@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.secret4news.common.Constants;
@@ -23,11 +23,11 @@ public class ArticleController {
 	private ArticleService articleService;
 	
 	@RequestMapping (value = "/articles", method = RequestMethod.GET)
-	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public List<HashMap<String, Object>> getArticleList(
+	public String getArticleList(
 			@RequestParam(value="offset", required=true, defaultValue="0") int offset,
-			@RequestParam(value="search", required=false) String search) {
+			@RequestParam(value="search", required=false) String search,
+			Model model) {
 		System.out.println("getArticleList get : " + offset + " | " + search);
 		
 		HashMap<String, Object> requestMap = new HashMap<String, Object>();
@@ -38,16 +38,22 @@ public class ArticleController {
 			requestMap.put("search", search);
 		}
 		
-		return articleService.getArticleList(requestMap);
+		List<HashMap<String, Object>> responseMap = articleService.getArticleList(requestMap); 
+		model.addAttribute("articles", responseMap);
+		model.addAttribute("offset", offset);
+		
+		return "board";
 	}
 	
 	@RequestMapping (value = "/article", method = RequestMethod.GET)
-	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public HashMap<String, Object> getArticle(@RequestParam(value="aid", required=true) int aid) {
+	public String getArticle(@RequestParam(value="aid", required=true) int aid, Model model) {
 		System.out.println("getContents GET : " + aid);
 		
-		return articleService.getArticle(aid);
+		HashMap<String, Object> article = articleService.getArticle(aid);
+		model.addAttribute("article", article);
+		
+		return "article";
 	}
 	
 	@RequestMapping (value = "/article", method = RequestMethod.POST)
@@ -73,5 +79,30 @@ public class ArticleController {
 		
 		articleService.deleteArticle(requestMap);
 	}
+	
+	@RequestMapping (value = "/write", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public String writeArticle() {
+		System.out.println("write");
+		
+		return "write";
+	}
+	
+	@RequestMapping (value = "/write.done", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	public String writeArticle(String atitle, String abody, String apw) {
+		System.out.println("write done");
+		
+		HashMap<String, Object> requestMap = new HashMap<String, Object>();
+		requestMap.put("title", atitle);
+		abody = abody.replace("\r\n","<br>");
+		requestMap.put("body", abody);
+		requestMap.put("pw", apw);
+		
+		articleService.setArticle(requestMap);
+		
+		return "redirect:/articles";
+	}
+	
 	
 }

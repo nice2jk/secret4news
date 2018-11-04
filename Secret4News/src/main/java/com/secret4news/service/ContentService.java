@@ -60,4 +60,26 @@ public class ContentService {
 			}
 		}
 	}
+	
+	@Transactional
+	public void setGrade(int id, int grade, String category) {
+		if(category.equals(Constants.CATEGORY_BEST)) {
+			if(grade == Constants.GRADE_NORMAL) {
+				contentDAO.delGrade(id);
+			} else {
+				contentDAO.setBestGrade(id);
+			}
+			
+			contentDAO.updateBestGrade(id, grade);			
+		} else {
+			if(grade == Constants.GRADE_NORMAL) {
+				contentDAO.delGrade(id);
+			} else {
+				contentDAO.setGrade(id);
+			}
+			
+			contentDAO.updateGrade(id, grade);
+		}
+	}
+	
 }

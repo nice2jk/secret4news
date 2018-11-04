@@ -95,5 +95,25 @@ public class ContentController {
 		return "contents";
 	}
 	
+	@RequestMapping (value = "/grade", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	public String grade(
+			@RequestParam(value="id", required=true) int id, 
+			@RequestParam(value="grade", required=true, defaultValue="1") int grade,
+			@RequestParam(value="category", required=true) String category,
+			@RequestParam(value="offset", required=true, defaultValue="0") int offset,
+			@RequestParam(value="search", required=false) String search,
+			Model model) {
+		System.out.println("setGrade : " + id + " | " + grade);
+		
+		contentService.setGrade(id, grade);
+		
+		if(search != null) {
+			return "redirect:/main?category=" + category + "&offset=" + offset + "&search=" + search;
+		}
+		
+		return "redirect:/main?category=" + category + "&offset=" + offset;
+	}
+	
 	
 }

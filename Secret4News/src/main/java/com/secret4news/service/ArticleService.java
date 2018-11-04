@@ -21,6 +21,7 @@ public class ArticleService {
 	}
 	
 	public HashMap<String, Object> getArticle(int aid) {
+		articleDAO.updateViewCount(aid);
 		HashMap<String, Object> responseMap = articleDAO.getArticle(aid);
 		List<HashMap<String, Object>> commentList = articleDAO.getCommentList(aid);
 		

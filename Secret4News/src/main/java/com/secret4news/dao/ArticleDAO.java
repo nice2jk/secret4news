@@ -12,6 +12,7 @@ public interface ArticleDAO {
 	public String getArticleUserId(@Param("aid") int aid);
 	public void setArticle(HashMap<String, Object> hashmap);
 	public void updateArticle(HashMap<String, Object> hashMap);
+	public void updateViewCount(@Param("aid") int aid);
 	public void deleteArticle(@Param("aid") int aid);
 	
 	public List<HashMap<String, Object>> getCommentList(@Param("aid") int aid);

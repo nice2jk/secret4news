@@ -4,7 +4,7 @@
 <mapper namespace="com.secret4news.dao.ArticleDAO">
 
 	<select id="getArticleList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT A.aid, A.title, A.body, A.ctime, COUNT(B.cid) AS count
+		SELECT A.aid, A.title, A.vcount, A.ctime, COUNT(B.cid) AS count
 		FROM article AS A LEFT OUTER JOIN comments AS B ON A.aid = B.aid
 		<if test="search != null and search != ''">
 			WHERE title LIKE '%${search}%'
@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="getArticle" resultType="java.util.HashMap">
-		SELECT aid, title, body, user_id, ctime 
+		SELECT aid, title, body, vcount, ctime 
 		FROM article 
 		WHERE aid = #{aid}
 	</select>
@@ -33,13 +33,17 @@
 	</select>
 	
 	<insert id="setArticle" parameterType="java.util.HashMap">
-		INSERT INTO article (title, body, user_id, pw) 
-		VALUES (#{title}, #{body}, #{id}, #{pw})
+		INSERT INTO article (title, body, pw)
+		VALUES (#{title}, #{body}, #{pw})
 	</insert>
 	
 	<update id="updateArticle">
 		UPDATE article SET title = #{title}, body = #{body}
 		WHERE aid = #{aid}
+	</update>
+	
+	<update id="updateViewCount">
+		UPDATE article SET vcount = vcount + 1 WHERE aid = #{aid}
 	</update>
 	
 	<delete id="deleteArticle">
