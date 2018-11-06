@@ -106,7 +106,7 @@ public class ContentController {
 			Model model) {
 		System.out.println("setGrade : " + id + " | " + grade);
 		
-		contentService.setGrade(id, grade);
+		contentService.setGrade(id, grade, category);
 		
 		if(search != null) {
 			return "redirect:/main?category=" + category + "&offset=" + offset + "&search=" + search;
