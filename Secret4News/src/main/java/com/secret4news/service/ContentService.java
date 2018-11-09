@@ -77,7 +77,7 @@ public class ContentService {
 			} else {
 				contentDAO.setGrade(id);
 			}
-			
+						
 			contentDAO.updateGrade(id, grade);
 		}
 	}

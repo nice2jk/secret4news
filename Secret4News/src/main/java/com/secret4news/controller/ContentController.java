@@ -101,6 +101,7 @@ public class ContentController {
 			@RequestParam(value="id", required=true) int id, 
 			@RequestParam(value="grade", required=true, defaultValue="1") int grade,
 			@RequestParam(value="category", required=true) String category,
+			@RequestParam(value="view_category", required=true) String viewCategory,
 			@RequestParam(value="offset", required=true, defaultValue="0") int offset,
 			@RequestParam(value="search", required=false) String search,
 			Model model) {
@@ -109,10 +110,10 @@ public class ContentController {
 		contentService.setGrade(id, grade, category);
 		
 		if(search != null) {
-			return "redirect:/main?category=" + category + "&offset=" + offset + "&search=" + search;
+			return "redirect:/main?category=" + viewCategory + "&offset=" + offset + "&search=" + search;
 		}
 		
-		return "redirect:/main?category=" + category + "&offset=" + offset;
+		return "redirect:/main?category=" + viewCategory + "&offset=" + offset;
 	}
 	
 	

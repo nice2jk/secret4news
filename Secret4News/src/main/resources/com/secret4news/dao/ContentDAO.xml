@@ -68,11 +68,11 @@
 	</update>
 	
 	<update id="setGrade">
-		INSERT INTO content_recmd (id, cid, cpname, title, link, category, grade, ctime, utime) SELECT id, cid, cpname, title, link, category, grade, ctime, utime FROM content WHERE id = #{id};
+		INSERT INTO content_recmd (id, cid, cpname, title, link, category, grade, ctime, utime) SELECT id, cid, cpname, title, link, category, 2, ctime, utime FROM content WHERE id = #{id};
 	</update>
 	
 	<update id="setBestGrade">
-		INSERT INTO content_recmd (id, cid, cpname, title, link, category, grade, ctime, utime) SELECT id, cid, cpname, title, link, category, grade, ctime, utime FROM content_best WHERE id = #{id};
+		INSERT INTO content_recmd (id, cid, cpname, title, link, category, grade, ctime, utime) SELECT id, cid, cpname, title, link, category, 2, ctime, utime FROM content_best WHERE id = #{id};
 	</update>
 	
 	<update id="delGrade">

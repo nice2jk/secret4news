@@ -76,7 +76,8 @@
 				</c:otherwise>
 	  		</c:choose>
           	<input type="hidden" name="offset" value="${offset}">
-          	<input type="hidden" name="category" value="${category}">
+          	<input type="hidden" name="category" value="${ct.category}">
+          	<input type="hidden" name="view_category" value="${category}">
           	<c:choose>
 				<c:when test="${empty ct.search }">					
 				</c:when>
