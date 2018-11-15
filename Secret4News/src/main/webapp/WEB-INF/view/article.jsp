@@ -55,15 +55,14 @@
 
 	<div class="my-3 p-3 bg-white">
 		<h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><a href="/articles">[자유게시판]</a><a href="/write"><img src="/images/write.png" alt="..." class="img-thumbnail mx-2"></a></h6>		
-		<div class="container">
+		
 			<h5 class="border-bottom border-gray py-2 my-3 font-weight-bold">${article.title}</h5>
 			<div class="d-flex justify-content-between py-2 mb-2 small align-items-center w-100 border-bottom border-gray">
 	            <span class="font-weight-bold">${article.aid}<img src="/images/view.png" alt="..." class="img-thumbnail mx-2">[${article.vcount}]<img src="/images/reply.png" alt="..." class="img-thumbnail mx-2">[${article.count}]</span>
 				<span class="text-success">${article.ctime}</span>
 		    </div>		
-			<p class="lead rounded shadow-sm small pt-3 pb-5">${article.body}</p>
-			<button onclick="location.href='/articles'" class="btn btn-primary my-2">목록</button>
-		</div>
+			<p class="pb-2" />${article.body}
+			<p class="pb-2" /><button onclick="location.href='/articles'" class="btn btn-primary mt-3">목록</button>		
 	</div>
 	
 	<p>

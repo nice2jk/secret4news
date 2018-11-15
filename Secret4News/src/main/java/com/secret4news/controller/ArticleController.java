@@ -95,7 +95,6 @@ public class ArticleController {
 		
 		HashMap<String, Object> requestMap = new HashMap<String, Object>();
 		requestMap.put("title", atitle);
-		abody = abody.replace("\r\n","<br>");
 		requestMap.put("body", abody);
 		requestMap.put("pw", apw);
 		
