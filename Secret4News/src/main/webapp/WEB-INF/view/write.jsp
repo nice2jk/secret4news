@@ -82,7 +82,8 @@
 				<input type="text" class="form-control" name="atitle" id="basic-label" placeholder="제목 입력" aria-label="Username" aria-describedby="basic-addon1" required>
 			</div>
 			<label for="basic-body" class="font-weight-bold my-1">본문 :</label>
-			<textarea name="abody" id="summernote" required></textarea>		
+			<input type="hidden" id="abody" name="abody" value=""/>
+			<textarea id="summernote" required></textarea>		
 		  	<div class="input-group my-2">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="basic-addon1">비밀번호</span>
@@ -131,6 +132,7 @@
     		  return;
     	  }
     	  
+    	  document.getElementById("abody").setAttribute('value', markupStr);
     	  form.submit();    	  
   	}
     </script>
