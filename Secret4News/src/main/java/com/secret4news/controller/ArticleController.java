@@ -64,13 +64,13 @@ public class ArticleController {
 		articleService.setArticle(requestMap);
 	}
 	
-	@RequestMapping (value = "/article", method = RequestMethod.PUT)
+/*	@RequestMapping (value = "/article", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void updateArticle(@RequestBody HashMap<String, Object> requestMap) {
 		System.out.println("getContents PUT : " + requestMap.get(Constants.USER_ID) + " | " + requestMap.get(Constants.ARTICLE_ID));
 		
 		articleService.updateArticle(requestMap);
-	}
+	}*/
 	
 	@RequestMapping (value = "/article", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
@@ -101,6 +101,19 @@ public class ArticleController {
 		articleService.setArticle(requestMap);
 		
 		return "redirect:/articles";
+	}
+	
+	@RequestMapping (value = "/delete.done", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	public String deleteArticle(String aid, String apw) {
+		System.out.println("delete done");
+		
+		HashMap<String, Object> requestMap = new HashMap<String, Object>();
+		requestMap.put("aid", aid);
+		requestMap.put("apw", apw);
+		
+		
+		return (1 == articleService.deleteArticle(requestMap)) ? "redirect:/articles" : "redirect:/article?aid=" + aid;
 	}
 	
 	

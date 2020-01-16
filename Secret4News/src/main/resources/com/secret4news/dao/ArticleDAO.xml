@@ -27,8 +27,8 @@
 		WHERE aid = #{aid}
 	</select>
 	
-	<select id="getArticleUserId" resultType="String">
-		SELECT user_id FROM article
+	<select id="getArticlePw" resultType="String">
+		SELECT pw FROM article
 		WHERE aid = #{aid}
 	</select>
 	

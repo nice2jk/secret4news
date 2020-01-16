@@ -4,13 +4,9 @@
 
 <html lang="ko">
 <head>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-3843225232663919",
-          enable_page_level_ads: true
-     });
-</script>
+
+<script data-ad-client="ca-pub-3843225232663919" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -54,15 +50,24 @@
 	</nav>
 
 	<div class="my-3 p-3 bg-white">
-		<h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><a href="/articles">[자유게시판]</a><a href="/write"><img src="/images/write.png" alt="..." class="img-thumbnail mx-2"></a></h6>		
-		
+		<h6 class="border-bottom border-gray pb-2 mb-0 font-weight-bold text-primary"><a href="/articles">[자유게시판]</a><a href="/write"><img src="/images/write.png" alt="..." class="img-thumbnail mx-2"></a></h6>
 			<h5 class="border-bottom border-gray py-2 my-3 font-weight-bold">${article.title}</h5>
 			<div class="d-flex justify-content-between py-2 mb-2 small align-items-center w-100 border-bottom border-gray">
 	            <span class="font-weight-bold">${article.aid}<img src="/images/view.png" alt="..." class="img-thumbnail mx-2">[${article.vcount}]<img src="/images/reply.png" alt="..." class="img-thumbnail mx-2">[${article.count}]</span>
 				<span class="text-success">${article.ctime}</span>
-		    </div>		
+		    </div>
 			<p class="pb-2" />${article.body}
-			<p class="pb-2" /><button onclick="location.href='/articles'" class="btn btn-primary mt-3">목록</button>		
+	</div>
+	
+	<div class="d-flex justify-content-between p-3 mb-2 small align-items-center w-100 border-bottom border-gray">
+		<button onclick="location.href='/articles'" class="btn btn-primary">목록</button>
+		<form id="deleteForm" action="/delete.done" method="post">
+			<div class="input-group-prepend">
+				<input type="hidden" id="aid" name="aid" value="${article.aid}"/>
+				<input type="text" name="apw" id="basic-label" placeholder="비밀번호 입력" aria-label="Username" aria-describedby="inputGroup-sizing-lg" required>
+				<button type="submit" class="btn btn-primary ml-2" onclick="goSubmit()">삭제</button>				
+			</div>
+		</form>
 	</div>
 	
 	<p>

@@ -9,7 +9,7 @@ public interface ArticleDAO {
 
 	public List<HashMap<String, Object>> getArticleList(HashMap<String, Object> hashmap);
 	public HashMap<String, Object> getArticle(@Param("aid") int aid);
-	public String getArticleUserId(@Param("aid") int aid);
+	public String getArticlePw(@Param("aid") int aid);
 	public void setArticle(HashMap<String, Object> hashmap);
 	public void updateArticle(HashMap<String, Object> hashMap);
 	public void updateViewCount(@Param("aid") int aid);
